@@ -1,0 +1,10 @@
+Ứng dụng phân phối chuẩn trong quản trị doanh thu
+Xác suất có điều kiện và định lý Bayes trong chẩn đoán rủi ro tín dụng
+Mô hình hồi quy tuyến tính dự báo doanh số bán hàng
+Ứng dụng chuỗi Markov trong phân tích thị phần
+Kiểm định giả thuyết để đánh giá chiến dịch marketing
+Sử dụng phân phối Poisson trong quản lý hàng chờ siêu thị
+Kỳ vọng toán học trong ra quyết định đầu tư
+Phương pháp lấy mẫu trong khảo sát thị trường
+Phân tích phương sai ANOVA so sánh doanh thu các khu vực
+Ứng dụng thống kê mô tả trong báo cáo tài chính

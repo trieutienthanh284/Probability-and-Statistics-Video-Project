@@ -1,0 +1,172 @@
+[
+  {
+    "topic": "Ứng dụng phân phối chuẩn trong quản trị doanh thu",
+    "cau_dan_nhap": "Bạn đã bao giờ tự hỏi làm thế nào các chuỗi bán lẻ như WinMart hay Starbucks dự báo chính xác lượng hàng cần nhập để tối ưu lợi nhuận chưa? Bí mật nằm ở một công cụ toán học quyền năng: Phân phối chuẩn.",
+    "tinh_huong_dan_nhap": "Hãy tưởng tượng bạn là quản lý chuỗi cà phê 'Vietnam Bean'. Mỗi sáng, bạn phải quyết định lượng sữa tươi nhập vào. Nếu nhập quá ít, bạn mất khách; nhập quá nhiều, sữa hỏng và gây lãng phí. Làm sao để tìm ra con số 'vàng'?",
+    "mo_ta_bai_toan": "Vấn đề là nhu cầu tiêu thụ sữa hàng ngày không cố định mà dao động xung quanh một mức trung bình. Chúng ta cần mô hình hóa biến động này bằng phân phối chuẩn để xác định mức tồn kho tối ưu sao cho xác suất thiếu hàng nằm trong ngưỡng cho phép.",
+    "dien_giai_minh_hoa": "Giả sử nhu cầu sữa trung bình mỗi ngày là 100 lít với độ lệch chuẩn là 10 lít. Nếu bạn muốn đạt độ tin cậy 95% (tương ứng với giá trị Z = 1.645 trong bảng phân phối chuẩn), bạn cần tính: 100 + (1.645 * 10) = 116.45 lít. Vậy, nhập 117 lít sữa sẽ giúp bạn tự tin phục vụ khách hàng mà không lo lãng phí quá mức.",
+    "tong_ket_kien_thuc": "Phân phối chuẩn giúp chuyển đổi những biến động ngẫu nhiên trong kinh doanh thành các con số dự báo có cơ sở. Bằng cách áp dụng giá trị Z và độ lệch chuẩn, nhà quản lý có thể chủ động kiểm soát rủi ro và tối đa hóa biên lợi nhuận.",
+    "tom_tat_tu_khoa": [
+      "Phân phối chuẩn",
+      "Quản trị doanh thu",
+      "Độ lệch chuẩn",
+      "Giá trị Z",
+      "Dự báo nhu cầu",
+      "Tối ưu tồn kho"
+    ],
+    "goi_y_tiep_theo": "Ứng dụng mô phỏng Monte Carlo trong dự báo dòng tiền doanh nghiệp"
+  },
+  {
+    "topic": "Xác suất có điều kiện và định lý Bayes trong chẩn đoán rủi ro tín dụng",
+    "cau_dan_nhap": "Bạn có bao giờ tự hỏi làm sao ngân hàng biết khách hàng nào sẽ 'bùng nợ' trước khi họ thực sự làm điều đó? Bí mật nằm ở xác suất có điều kiện và định lý Bayes – chiếc la bàn giúp các nhà quản trị né tránh những quả bom nợ xấu.",
+    "tinh_huong_dan_nhap": "Hãy tưởng tượng bạn là Giám đốc rủi ro tại một ngân hàng thương mại lớn tại Việt Nam. Bạn đang xem xét hồ sơ vay vốn của một doanh nghiệp vừa và nhỏ, và hệ thống cảnh báo sớm ghi nhận doanh nghiệp này có dấu hiệu chậm trả lãi vay trong quý vừa qua.",
+    "mo_ta_bai_toan": "Bài toán là xác định xác suất thực sự doanh nghiệp này sẽ vỡ nợ (R) dựa trên dấu hiệu cảnh báo (D). Dữ liệu lịch sử cho thấy xác suất vỡ nợ chung của toàn thị trường là thấp, nhưng với một khách hàng đã có dấu hiệu cảnh báo, xác suất này sẽ thay đổi như thế nào?",
+    "dien_giai_minh_hoa": "Giả sử: P(R) = 0.05 (xác suất vỡ nợ chung là 5%). P(D|R) = 0.8 (xác suất có dấu hiệu cảnh báo nếu thực sự vỡ nợ là 80%). P(D) = 0.1 (xác suất xuất hiện dấu hiệu cảnh báo ở bất kỳ khách hàng nào là 10%). Theo định lý Bayes: P(R|D) = [P(D|R) * P(R)] / P(D) = [0.8 * 0.05] / 0.1 = 0.4. Kết quả là 40%, cao gấp 8 lần so với xác suất ban đầu, giúp ngân hàng đưa ra quyết định thắt chặt tín dụng ngay lập tức.",
+    "tong_ket_kien_thuc": "Xác suất có điều kiện cho phép cập nhật niềm tin vào một sự kiện khi có thông tin mới. Định lý Bayes là công cụ toán học mạnh mẽ nhất để 'biến đổi' xác suất tiên nghiệm (prior) thành xác suất hậu nghiệm (posterior), giúp đưa ra quyết định dựa trên bằng chứng dữ liệu thay vì cảm tính.",
+    "tom_tat_tu_khoa": [
+      "Xác suất có điều kiện",
+      "Định lý Bayes",
+      "Rủi ro tín dụng",
+      "Xác suất hậu nghiệm",
+      "Dữ liệu lịch sử",
+      "Quyết định kinh doanh"
+    ],
+    "goi_y_tiep_theo": "Ứng dụng Machine Learning và mô hình Logistic Regression trong dự báo vỡ nợ khách hàng cá nhân."
+  },
+  {
+    "topic": "Mô hình hồi quy tuyến tính dự báo doanh số bán hàng",
+    "cau_dan_nhap": "Bạn có bao giờ tự hỏi làm thế nào các ông lớn như Vinamilk hay Shopee có thể dự đoán chính xác hàng triệu đơn hàng mỗi tháng không? Bí mật không nằm ở quả cầu pha lê, mà chính là mô hình hồi quy tuyến tính.",
+    "tinh_huong_dan_nhap": "Giả sử bạn là quản lý marketing tại một chuỗi cửa hàng cà phê tại Việt Nam. Bạn đang đau đầu vì không biết nên chi bao nhiêu cho quảng cáo Facebook tháng tới để đạt mục tiêu doanh số 500 triệu đồng.",
+    "mo_ta_bai_toan": "Bài toán là tìm mối quan hệ toán học giữa 'Chi phí quảng cáo' (biến độc lập X) và 'Doanh số bán hàng' (biến phụ thuộc Y). Chúng ta cần xây dựng phương trình Y = a + bX để dự báo kết quả dựa trên các dữ liệu lịch sử đã có.",
+    "dien_giai_minh_hoa": "Giả sử dữ liệu 3 tháng qua cho thấy: Chi phí 10tr -> Doanh số 200tr; Chi phí 20tr -> Doanh số 300tr; Chi phí 30tr -> Doanh số 400tr. Áp dụng công thức hồi quy, ta tính được b = 10 (mỗi triệu quảng cáo tăng thêm 10 triệu doanh số) và a = 100 (doanh số cơ bản khi không quảng cáo). Vậy phương trình là Y = 100 + 10X. Nếu tháng tới bạn chi 50 triệu, dự báo doanh số sẽ là: 100 + 10*50 = 600 triệu đồng.",
+    "tong_ket_kien_thuc": "Mô hình hồi quy tuyến tính giúp chuyển hóa dữ liệu quá khứ thành công cụ dự báo tương lai. Hiệu quả của mô hình phụ thuộc vào hệ số tương quan (R-squared) và việc xác định đúng các biến tác động đến kết quả kinh doanh.",
+    "tom_tat_tu_khoa": [
+      "Hồi quy tuyến tính",
+      "Biến độc lập",
+      "Biến phụ thuộc",
+      "Dự báo doanh số",
+      "Hệ số tương quan",
+      "Dữ liệu lịch sử"
+    ],
+    "goi_y_tiep_theo": "Đánh giá độ chính xác của mô hình hồi quy bằng chỉ số R-squared và Sai số chuẩn."
+  },
+  {
+    "topic": "Ứng dụng chuỗi Markov trong phân tích thị phần",
+    "cau_dan_nhap": "Bạn có bao giờ tự hỏi làm thế nào các tập đoàn lớn dự đoán được mình sẽ mất bao nhiêu khách hàng vào tay đối thủ trong tương lai? Câu trả lời nằm ở một công cụ toán học đầy quyền năng: Chuỗi Markov.",
+    "tinh_huong_dan_nhap": "Hãy nhìn vào thị trường viễn thông Việt Nam, nơi Viettel, Vinaphone và Mobifone cạnh tranh gay gắt. Một người dùng hôm nay dùng Viettel, ngày mai có thể chuyển sang Vinaphone vì một gói cước ưu đãi. Sự thay đổi không ngừng này chính là một chuỗi Markov điển hình.",
+    "mo_ta_bai_toan": "Bài toán đặt ra là: Nếu biết được tỷ lệ khách hàng chuyển đổi giữa các hãng trong tháng hiện tại, làm thế nào để tính toán thị phần cân bằng (trạng thái ổn định) trong dài hạn? Đây là cơ sở giúp doanh nghiệp đưa ra quyết định chiến lược thay vì dự đoán cảm tính.",
+    "dien_giai_minh_hoa": "Giả sử thị trường có 2 hãng A và B. Ma trận chuyển đổi: 80% khách hãng A ở lại với A (20% chuyển sang B); 70% khách hãng B ở lại với B (30% chuyển sang A). Nếu hiện tại A chiếm 60% thị phần, sau 1 tháng thị phần A = (0.6 * 0.8) + (0.4 * 0.3) = 0.6. Cứ tiếp tục tính toán qua nhiều tháng, thị phần sẽ hội tụ về một điểm cân bằng nơi tỷ lệ chuyển đi bằng tỷ lệ chuyển đến, giúp nhà quản trị biết được 'trần' thị phần của mình.",
+    "tong_ket_kien_thuc": "Chuỗi Markov giúp mô hình hóa hành vi khách hàng dựa trên xác suất chuyển đổi giữa các trạng thái. Điểm mấu chốt là ma trận xác suất chuyển đổi và trạng thái ổn định (steady-state), nơi thị phần không còn thay đổi dù khách hàng vẫn tiếp tục luân chuyển.",
+    "tom_tat_tu_khoa": [
+      "Chuỗi Markov",
+      "Ma trận chuyển đổi",
+      "Thị phần",
+      "Trạng thái ổn định",
+      "Xác suất thống kê",
+      "Dự báo kinh doanh"
+    ],
+    "goi_y_tiep_theo": "Ứng dụng chuỗi Markov trong dự báo rủi ro tín dụng và nợ xấu ngân hàng."
+  },
+  {
+    "topic": "Kiểm định giả thuyết để đánh giá chiến dịch marketing",
+    "cau_dan_nhap": "Bạn đã bao giờ tự hỏi liệu chiến dịch quảng cáo mới có thực sự làm tăng doanh số, hay tất cả chỉ là sự may rủi? Hãy cùng tìm lời giải đáp chính xác bằng công cụ quyền năng: Kiểm định giả thuyết.",
+    "tinh_huong_dan_nhap": "Imagine bạn là Giám đốc Marketing của một chuỗi trà sữa tại Việt Nam. Bạn vừa chi 500 triệu đồng cho chiến dịch 'Mua 1 tặng 1' và thấy doanh thu tuần này tăng lên. Nhưng làm sao để chắc chắn đây là nhờ quảng cáo chứ không phải do trùng vào dịp lễ?",
+    "mo_ta_bai_toan": "Chúng ta cần kiểm định liệu sự gia tăng doanh thu có ý nghĩa thống kê (tức là chắc chắn do hiệu quả chiến dịch) hay chỉ là biến động ngẫu nhiên. Đây là bài toán kiểm định giả thuyết trung bình của hai tổng thể.",
+    "dien_giai_minh_hoa": "Giả sử doanh thu trung bình trước đây là 100 triệu/tuần (độ lệch chuẩn 10 triệu). Sau khi chạy quảng cáo, doanh thu 30 ngày ghi nhận trung bình là 105 triệu. Chúng ta đặt giả thuyết H0: Quảng cáo không hiệu quả (μ = 100) và H1: Quảng cáo hiệu quả (μ > 100). Sử dụng kiểm định Z, với mức ý nghĩa α = 0.05, ta tính được giá trị Z-score là 2.74. Vì 2.74 > 1.645 (giá trị tới hạn), ta bác bỏ H0. Kết luận: Chiến dịch thực sự mang lại kết quả vượt trội với độ tin cậy 95%.",
+    "tong_ket_kien_thuc": "Kiểm định giả thuyết giúp loại bỏ cảm tính trong kinh doanh. Cấu trúc quan trọng gồm: Xác định giả thuyết (H0, H1), chọn mức ý nghĩa (α), tính toán giá trị thống kê và ra quyết định bác bỏ hoặc chấp nhận giả thuyết dựa trên p-value hoặc giá trị tới hạn.",
+    "tom_tat_tu_khoa": [
+      "Kiểm định giả thuyết",
+      "Mức ý nghĩa",
+      "p-value",
+      "Giả thuyết không",
+      "Phân tích dữ liệu marketing"
+    ],
+    "goi_y_tiep_theo": "Sử dụng A/B Testing trong tối ưu hóa giao diện website và tỷ lệ chuyển đổi."
+  },
+  {
+    "topic": "Sử dụng phân phối Poisson trong quản lý hàng chờ siêu thị",
+    "cau_dan_nhap": "Bạn đã bao giờ đứng chờ thanh toán tại siêu thị và tự hỏi: 'Tại sao hàng mình luôn chậm nhất?'. Hãy cùng giải mã cơn ác mộng xếp hàng bằng toán học!",
+    "tinh_huong_dan_nhap": "Tại chuỗi siêu thị WinMart, vào khung giờ cao điểm 18h tối, dòng người đổ về thanh toán khiến các nhân viên thu ngân quá tải. Quản lý cần quyết định xem có nên mở thêm quầy mới hay không mà không gây lãng phí chi phí vận hành.",
+    "mo_ta_bai_toan": "Bài toán là làm sao dự đoán chính xác số lượng khách hàng đến quầy trong một khoảng thời gian nhất định (ví dụ 10 phút). Nếu biết được xác suất có bao nhiêu người đến, quản lý có thể tối ưu số lượng quầy mở để giảm thời gian chờ của khách mà vẫn tiết kiệm nhân sự.",
+    "dien_giai_minh_hoa": "Giả sử trung bình có 5 khách hàng đến quầy mỗi 10 phút (λ = 5). Công thức Poisson: P(x) = (e^-λ * λ^x) / x!. Nếu bạn muốn tính xác suất chính xác 3 khách đến trong 10 phút, ta thay λ=5 và x=3 vào công thức: P(3) = (e^-5 * 5^3) / 3! ≈ 0.14. Nghĩa là có 14% khả năng chính xác 3 khách hàng sẽ xuất hiện. Từ đó, ta có thể tính xác suất cho 0, 1, 2... khách để lập bảng phân bổ nhân lực.",
+    "tong_ket_kien_thuc": "Phân phối Poisson là công cụ đắc lực để mô hình hóa các sự kiện xảy ra độc lập trong một khoảng thời gian cố định. Nó giúp nhà quản lý dự báo nhu cầu phục vụ và tối ưu hóa hệ thống hàng chờ, giảm thiểu cả chi phí chờ đợi của khách và chi phí nhân sự.",
+    "tom_tat_tu_khoa": [
+      "Phân phối Poisson",
+      "Lý thuyết hàng chờ",
+      "Quản lý vận hành",
+      "Dự báo nhu cầu",
+      "Tối ưu hóa nhân sự",
+      "Xác suất thống kê"
+    ],
+    "goi_y_tiep_theo": "Mô hình M/M/1: Khi nào thì một quầy thu ngân trở nên quá tải?"
+  },
+  {
+    "topic": "Kỳ vọng toán học trong ra quyết định đầu tư",
+    "cau_dan_nhap": "Bạn có bao giờ tự hỏi làm sao các nhà đầu tư lớn luôn giữ được 'cái đầu lạnh' trước những biến động thị trường? Bí mật nằm ở một công cụ toán học đơn giản nhưng đầy quyền năng: Kỳ vọng toán học.",
+    "tinh_huong_dan_nhap": "Hãy nhìn vào tập đoàn Vingroup khi họ quyết định đầu tư vào lĩnh vực xe điện VinFast. Giữa hàng tỷ USD rủi ro và tiềm năng tăng trưởng bùng nổ, họ không tung đồng xu để quyết định, mà dùng các mô hình xác suất để đo lường giá trị kỳ vọng dài hạn.",
+    "mo_ta_bai_toan": "Trong đầu tư, chúng ta không bao giờ biết chắc chắn 100% kết quả. Bài toán ở đây là làm thế nào để chọn một dự án khi biết có nhiều kịch bản (thắng/thua, lời/lỗ) với các xác suất khác nhau, nhằm tối ưu hóa lợi nhuận trong dài hạn.",
+    "dien_giai_minh_hoa": "Giả sử bạn đầu tư 100 triệu vào dự án startup: 60% khả năng lãi 50 triệu, 40% khả năng lỗ 30 triệu. Kỳ vọng toán học E(X) = (0.6 * 50) + (0.4 * -30) = 30 - 12 = 18 triệu. Con số dương 18 triệu này cho thấy về mặt toán học, nếu bạn thực hiện dự án này nhiều lần, trung bình bạn sẽ thu về 18 triệu đồng. Nếu kỳ vọng âm, đó là dấu hiệu cảnh báo bạn nên tránh xa dù cảm giác 'may mắn' có thể khiến bạn muốn thử.",
+    "tong_ket_kien_thuc": "Kỳ vọng toán học là trung bình trọng số của tất cả các kết quả có thể xảy ra, tính theo xác suất. Trong đầu tư, giá trị kỳ vọng dương là điều kiện cần để bắt đầu, giúp chúng ta loại bỏ yếu tố cảm tính và tập trung vào hiệu quả dài hạn.",
+    "tom_tat_tu_khoa": [
+      "Kỳ vọng toán học",
+      "Xác suất",
+      "Đầu tư",
+      "Quản trị rủi ro",
+      "Ra quyết định",
+      "Phân tích kịch bản",
+      "Giá trị trung bình"
+    ],
+    "goi_y_tiep_theo": "Độ lệch chuẩn và đo lường rủi ro: Tại sao kỳ vọng cao chưa chắc đã an toàn?"
+  },
+  {
+    "topic": "Phương pháp lấy mẫu trong khảo sát thị trường",
+    "cau_dan_nhap": "Bạn có bao giờ tự hỏi làm thế nào các tập đoàn lớn như Vinamilk hay Shopee có thể thấu hiểu hàng triệu khách hàng mà không cần hỏi ý kiến từng người một? Bí mật nằm ở nghệ thuật chọn mẫu – chìa khóa vàng giúp biến dữ liệu khổng lồ thành những quyết định kinh doanh chính xác.",
+    "tinh_huong_dan_nhap": "Hãy tưởng tượng bạn là Giám đốc Marketing của một chuỗi trà sữa đang muốn tung ra dòng sản phẩm mới. Với 500.000 khách hàng thân thiết, việc gửi khảo sát cho tất cả là bất khả thi về thời gian và chi phí. Làm sao để chọn ra một nhóm đại diện đủ tốt để đưa ra quyết định?",
+    "mo_ta_bai_toan": "Bài toán ở đây là ước lượng nhu cầu thị trường từ một tập hợp nhỏ (mẫu) sao cho sai số là thấp nhất. Chúng ta cần giải quyết sự cân bằng giữa tính đại diện của mẫu và tính khả thi về chi phí dựa trên các phương pháp xác suất thống kê.",
+    "dien_giai_minh_hoa": "Giả sử bạn cần ước lượng tỷ lệ khách hàng thích vị trà sữa mới. Với dân số N = 100.000, độ tin cậy mong muốn là 95% (Z=1.96) và sai số cho phép e = 5%. Sử dụng công thức cỡ mẫu n = (Z^2 * p * (1-p)) / e^2. Với p=0.5 (trường hợp phân vân nhất), n = (1.96^2 * 0.25) / 0.05^2 ≈ 384 người. Thay vì hỏi 100.000 người, bạn chỉ cần 384 phản hồi ngẫu nhiên là đủ để suy rộng cho toàn bộ thị trường với độ chính xác cao.",
+    "tong_ket_kien_thuc": "Lấy mẫu không phải là chọn đại, mà là quá trình khoa học. Cần phân biệt rõ: Lấy mẫu ngẫu nhiên đơn giản (mọi đối tượng có cơ hội như nhau) và Lấy mẫu phân tầng (chia nhóm để đảm bảo tính đại diện cho các phân khúc khác nhau như độ tuổi, thu nhập). Sai số là không thể tránh khỏi, nhưng ta có thể kiểm soát nó thông qua cỡ mẫu và phương pháp chọn.",
+    "tom_tat_tu_khoa": [
+      "Cỡ mẫu",
+      "Độ tin cậy",
+      "Sai số cho phép",
+      "Lấy mẫu ngẫu nhiên",
+      "Lấy mẫu phân tầng",
+      "Đại diện thống kê"
+    ],
+    "goi_y_tiep_theo": "Sai lệch trong khảo sát (Bias): Khi nào dữ liệu của bạn trở nên sai lệch và cách khắc phục."
+  },
+  {
+    "topic": "Phân tích phương sai ANOVA so sánh doanh thu các khu vực",
+    "cau_dan_nhap": "Bạn có bao giờ tự hỏi liệu sự khác biệt về doanh thu giữa các chi nhánh chỉ là ngẫu nhiên, hay do hiệu quả kinh doanh thực sự khác nhau? Hãy cùng khám phá công cụ ANOVA để trả lời câu hỏi này nhé!",
+    "tinh_huong_dan_nhap": "Công ty thời trang 'VietStyle' có 3 cửa hàng tại Hà Nội, Đà Nẵng và TP.HCM. Giám đốc kinh doanh nhận thấy doanh thu tháng này có sự chênh lệch và muốn biết liệu chiến lược quản lý tại mỗi vùng có thực sự tạo ra sự khác biệt về mặt thống kê hay không.",
+    "mo_ta_bai_toan": "Chúng ta có dữ liệu doanh thu của 3 nhóm (3 khu vực). Thay vì so sánh từng cặp (rất dễ sai sót và tốn thời gian), ta sử dụng ANOVA để kiểm định giả thuyết: liệu giá trị trung bình của cả 3 nhóm có bằng nhau không, hay ít nhất một khu vực đang vượt trội/tụt hậu so với phần còn lại?",
+    "dien_giai_minh_hoa": "Giả sử doanh thu 3 ngày của 3 khu vực là: Hà Nội (10, 12, 11), Đà Nẵng (8, 9, 10), TP.HCM (15, 16, 14). ANOVA sẽ tính toán hai đại lượng: 'Phương sai giữa các nhóm' (thể hiện sự khác biệt giữa các khu vực) và 'Phương sai trong nội bộ nhóm' (thể hiện biến động ngẫu nhiên). Chúng ta tính chỉ số F = (Phương sai giữa các nhóm) / (Phương sai trong nhóm). Nếu F > F_tới hạn, ta bác bỏ giả thuyết H0 (tất cả bằng nhau), chứng tỏ vị trí địa lý thực sự tác động mạnh đến doanh thu.",
+    "tong_ket_kien_thuc": "ANOVA giúp so sánh trung bình của nhiều nhóm cùng lúc, giảm thiểu sai số so với việc kiểm định t-test nhiều lần. Nếu giá trị p < 0.05, ta kết luận có sự khác biệt có ý nghĩa thống kê giữa các khu vực, từ đó đưa ra quyết định điều chỉnh ngân sách hoặc nhân sự hợp lý.",
+    "tom_tat_tu_khoa": [
+      "ANOVA",
+      "Phương sai",
+      "Giả thuyết H0",
+      "Giá trị p",
+      "Kiểm định thống kê",
+      "Ra quyết định kinh doanh"
+    ],
+    "goi_y_tiep_theo": "Kiểm định hậu kiểm (Post-hoc test) để biết chính xác khu vực nào khác biệt sau khi ANOVA cho kết quả dương tính."
+  },
+  {
+    "topic": "Ứng dụng thống kê mô tả trong báo cáo tài chính",
+    "cau_dan_nhap": "Bạn có bao giờ tự hỏi làm sao để nắm bắt 'sức khỏe' của một doanh nghiệp khổng lồ chỉ qua hàng ngàn con số khô khan? Thống kê mô tả chính là chiếc kính lúp giúp bạn nhìn thấu bức tranh tài chính đó.",
+    "tinh_huong_dan_nhap": "Hãy tưởng tượng bạn là một chuyên viên phân tích tại Vinamilk. Cuối năm, bạn nhận được bảng dữ liệu chi tiết của 10.000 giao dịch bán hàng mỗi ngày trong suốt một năm qua. Nhìn vào danh sách dài dằng dặc đó, làm sao bạn báo cáo nhanh cho ban giám đốc về hiệu quả kinh doanh?",
+    "mo_ta_bai_toan": "Dữ liệu thô (raw data) là một 'đại dương' thông tin hỗn loạn. Bài toán đặt ra là làm thế nào để cô đọng, tóm tắt và mô tả các đặc tính của tập dữ liệu này sao cho dễ hiểu, có ý nghĩa và hỗ trợ ra quyết định kinh doanh chính xác.",
+    "dien_giai_minh_hoa": "Chúng ta dùng 3 công cụ chính: 1. Đo lường xu hướng tập trung (Mean, Median): Giả sử giá trị đơn hàng trung bình là 500k, nhưng median là 300k, điều này cho thấy có một vài đơn hàng cực lớn đang kéo mức trung bình lên. 2. Đo lường sự phân tán (Standard Deviation): Nếu độ lệch chuẩn cao, doanh thu ngày của bạn biến động mạnh, rủi ro cao. 3. Phân phối tần suất: Chia đơn hàng thành các nhóm (ví dụ: 100k-300k, 301k-500k...), bạn sẽ thấy nhóm khách hàng nào đang đóng góp doanh thu chủ lực. Ví dụ: Nếu 80% giao dịch nằm ở khoảng 200k-400k, đó chính là 'phân khúc vàng' để bạn tập trung khuyến mãi.",
+    "tong_ket_kien_thuc": "Thống kê mô tả không phải là dự đoán tương lai, mà là cách 'kể chuyện' thông qua số liệu hiện tại. Việc kết hợp Mean, Median, và Độ lệch chuẩn giúp nhà quản trị nhận diện rõ quy luật, sự ổn định và các điểm bất thường trong báo cáo tài chính.",
+    "tom_tat_tu_khoa": [
+      "Thống kê mô tả",
+      "Giá trị trung bình",
+      "Trung vị",
+      "Độ lệch chuẩn",
+      "Phân phối dữ liệu",
+      "Báo cáo tài chính"
+    ],
+    "goi_y_tiep_theo": "Ứng dụng kiểm định giả thuyết (Hypothesis Testing) để đánh giá chiến lược marketing có thực sự làm tăng doanh số hay không."
+  }
+]
