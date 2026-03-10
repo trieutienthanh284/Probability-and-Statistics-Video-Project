@@ -1,5 +1,5 @@
 from google import genai
-API_KEY = "AIzaSyAZCTRDxww0HB3oCH1NLNByxIOqvoBN804"
+API_KEY = "AIzaSyDHwIaZfjnBMuifAFnChOhlYP-8ZnIHKpo"
 client = genai.Client(api_key=API_KEY)
 
 # print("Gemini API key đã config thành công với SDK mới!")

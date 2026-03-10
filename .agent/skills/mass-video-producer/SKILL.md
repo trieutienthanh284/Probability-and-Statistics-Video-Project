@@ -1,25 +1,34 @@
 ---
-name: mass-video-producer
-description: Tự động sản xuất hàng loạt video về ứng dụng xác suất thống kê trong kinh tế & quản lý
+name: script-bank-producer
+description: Chỉ sinh ngân hàng kịch bản (script) theo cấu trúc chuẩn 7 phần. Không tạo video, không visual, không audio, không MP4. Output duy nhất là file script_bank.json
 ---
 
-# Khi nào kích hoạt
-Bất kỳ yêu cầu nào chứa "produce", "generate", "tạo", "batch video", "xác suất thống kê kinh tế"
+# Script Bank Producer - Chỉ sinh kịch bản
 
-# Quy trình bắt buộc (thực hiện tuần tự)
-1. Đọc/ tạo topic từ scriptwriting/topic.txt (nếu rỗng → tự sinh 10–20 topic liên quan xác suất/thống kê kinh tế/quản lý)
+## Khi nào dùng
+Bất kỳ yêu cầu nào chứa "ngân hàng kịch bản", "script bank", "chỉ script", "json script".
+
+## Quy trình bắt buộc (chỉ làm phần này)
+1. Đọc tất cả topic từ scriptwriting/topic.txt
 2. Với mỗi topic:
-   - Sinh script Markdown 5–7 phút (dùng prompt từ prompt.txt hoặc mặc định)
-   - Lưu: scriptwriting/raw_script/{slug}.md
-   - Sinh visual (matplotlib biểu đồ, histogram, regression...)
-   - Lưu: visual/{slug}/
-   - Sinh audio (gTTS, ưu tiên tiếng Việt)
-   - Ghép MP4 bằng moviepy → output_videos/{slug}.mp4
-3. Cập nhật aggregated_scripts.xlsx
-4. Báo cáo danh sách video + đường dẫn
+   - Sử dụng prompt từ prompt.txt
+   - Sinh script theo đúng 7 phần:
+     - Câu dẫn nhập
+     - Tình huống dẫn nhập
+     - Mô tả bài toán/vấn đề cần giải quyết
+     - Diễn giải/Minh họa
+     - Tổng kết kiến thức liên quan
+     - Tóm tắt từ khóa
+     - Gợi ý tiếp theo
+   - Lưu vào cấu trúc JSON
+3. Sau khi xong tất cả → ghi đè file `script_bank.json` ở thư mục gốc workspace (chứa mảng JSON của tất cả kịch bản).
+4. Báo danh sách topic đã sinh và đường dẫn file JSON.
 
-# Prompt mặc định nếu không có file
-"Bạn là MC video giáo dục tiếng Việt. Viết script YouTube 5-7 phút về: {topic}. Lĩnh vực: Ứng dụng xác suất thống kê trong kinh tế - quản lý. Cấu trúc: Hook 15s + Tiêu đề + Lý thuyết đơn giản + Ví dụ thực tế VN/quốc tế + Tính toán minh họa + Kết luận + CTA. Giọng gần gũi."
+## Prompt mặc định (sẽ được dùng)
+Xem file prompt.txt (đã được cập nhật theo cấu trúc mới).
 
-# Thư viện cần (agent tự install nếu thiếu)
-google-generativeai matplotlib numpy moviepy gtts pandas openpyxl
+## Output
+Chỉ tạo file: **script_bank.json** (không tạo thư mục visual, output_videos, không chạy moviepy, gtts).
+
+## Sau khi xong
+Hiển thị nội dung 2-3 kịch bản đầu tiên trong chat và đường dẫn file JSON.
