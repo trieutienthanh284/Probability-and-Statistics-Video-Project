@@ -1,58 +1,53 @@
 from manim import *
 
+# Cấu hình video dọc 9:16
+config.pixel_height = 1920
+config.pixel_width = 1080
+config.frame_height = 14.22
+config.frame_width = 8.0
+
 class IntroScene(Scene):
     def construct(self):
-        self.wait(0.5)
 
-        # ── Thêm nhân vật (ảnh của bạn) ───────────────────────────────
-        # Đặt tên file ảnh là character.png (hoặc đổi tên tùy ý)
-        character = ImageMobject("Anh ộ i i.png") \
-            .scale(0.6) \
-            .to_edge(LEFT, buff=1.2) \
-            .shift(DOWN * 0.8)   # điều chỉnh vị trí lên/xuống nếu cần
-
-        # Có thể thêm hiệu ứng nhỏ cho nhân vật (tùy chọn)
-        character.shift(LEFT * 2)  # bắt đầu từ ngoài màn hình bên trái
-
-        # ── Dòng chữ chính ─────────────────────────────────────────────
-        title = Text(
-            "Bạn sẽ nắm được bí quyết tuyển dụng nhân sự tốt\nchỉ bằng một công thức",
+        # PHẦN CHỮ
+        title = MarkupText(
+            f'<span weight="bold">Nắm <span color="{YELLOW}">bí quyết</span>\n'
+            f'<span color="{BLUE}">tuyển dụng</span> <span color="{GREEN}">nhân sự tốt</span>\n'
+            f'chỉ bằng\n'
+            f'<span color="{RED}">MỘT công thức</span></span>',
+            font="Be Vietnam Pro",
             font_size=48,
-            t2c={
-                "bí quyết": YELLOW,
-                "tuyển dụng": BLUE,
-                "nhân sự tốt": GREEN,
-                "một công thức": RED
-            },
-            line_spacing=0.9,
-            weight=BOLD
-        ).scale(0.9).next_to(character, RIGHT, buff=0.8).align_to(character, UP)
+            line_spacing=1.5,
+            justify=True
+        ).move_to(UP * 3.8)
 
-        # ── Animation ──────────────────────────────────────────────────
-        # Nhân vật trượt vào từ bên trái + chữ hiện lên cùng lúc
+        # NHÂN VẬT
+        character = ImageMobject("video_project/demo/assets/DoMixi.png")\
+            .scale(1.15)\
+            .move_to(DOWN * 1.5)
+
+        character.shift(DOWN * 1.8)
+
+        # Nhân vật + chữ xuất hiện
         self.play(
-            character.animate.shift(RIGHT * 2),   # trượt vào vị trí cuối
-            Write(title, run_time=2.2),
-            title.animate.set_color_by_gradient(BLUE, PURPLE, RED),
-            run_time=2.2,
-            lag_ratio=0.3   # nhân vật bắt đầu trước chữ một chút
+            character.animate.shift(UP * 1.8),
+            FadeIn(character, scale=0.9),
+            Write(title),
+            run_time=2.0,
+            lag_ratio=0.05
         )
 
-        # Pulse nhẹ cả nhân vật + chữ
+        # Pulse nhẹ
         self.play(
-            character.animate.scale(1.08),
-            title.animate.scale(1.08).set_opacity(0.95),
+            character.animate.scale(1.05),
+            title.animate.scale(1.03),
             rate_func=there_and_back,
-            run_time=0.8
-        )
-
-        self.wait(1.0)
-
-        # Fade out cả hai
-        self.play(
-            FadeOut(character),
-            FadeOut(title),
             run_time=0.7
         )
 
-        self.wait(0.3)
+        # Thoát cảnh
+        self.play(
+            FadeOut(character),
+            FadeOut(title),
+            run_time=0.8
+        )
