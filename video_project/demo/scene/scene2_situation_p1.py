@@ -1,5 +1,10 @@
 from manim import *
 
+config.pixel_height = 1920
+config.pixel_width = 1080
+config.frame_height = 14.22
+config.frame_width = 8.0
+
 class SituationScene(Scene):
     def construct(self):
         text = Text("Công ty IT cần tuyển 100 kỹ sư phần mềm", font_size=40)

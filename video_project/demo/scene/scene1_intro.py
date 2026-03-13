@@ -12,7 +12,7 @@ class IntroScene(Scene):
         # PHẦN CHỮ
         title = MarkupText(
             f'<span weight="bold">Nắm <span color="{YELLOW}">bí quyết</span>\n'
-            f'<span color="{BLUE}">tuyển dụng</span> <span color="{GREEN}">nhân sự tốt</span>\n'
+            f'<span color="{BLUE}">tuyển dụng</span> <span color="{GREEN}">nhân sự</span>\n'
             f'chỉ bằng\n'
             f'<span color="{RED}">MỘT công thức</span></span>',
             font="Be Vietnam Pro",
@@ -22,7 +22,7 @@ class IntroScene(Scene):
         ).move_to(UP * 3.8)
 
         # NHÂN VẬT
-        character = ImageMobject("video_project/demo/assets/DoMixi.png")\
+        character = ImageMobject("video_project/demo/assets/images/DoMixi.png")\
             .scale(1.15)\
             .move_to(DOWN * 1.5)
 
