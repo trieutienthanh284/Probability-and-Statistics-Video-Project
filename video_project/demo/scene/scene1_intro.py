@@ -16,7 +16,7 @@ class IntroScene(Scene):
             f'chỉ bằng\n'
             f'<span color="{RED}">MỘT công thức</span></span>',
             font="Be Vietnam Pro",
-            font_size=48,
+            font_size=44,
             line_spacing=1.5,
             justify=True
         ).move_to(UP * 3.8)
