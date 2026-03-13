@@ -1,7 +1,6 @@
 from manim import *
 from pathlib import Path
 
-# ── CẤU HÌNH VIDEO DỌC 9:16 ──
 config.pixel_height = 1920
 config.pixel_width = 1080
 config.frame_height = 14.22
@@ -10,7 +9,6 @@ config.frame_width = 8.0
 
 class SituationScene(Scene):
 
-    # ── HÀM TẠO SUBTITLE TỰ ĐỘNG ──
     def create_subtitle(self, text):
         sub = MarkupText(
             text,
@@ -19,27 +17,19 @@ class SituationScene(Scene):
             justify=True
         )
 
-        # giới hạn chiều rộng để tránh tràn màn hình
         sub.set_max_width(config.frame_width - 1)
-
-        # luôn nằm dưới cùng màn hình
         sub.to_edge(DOWN, buff=2.2)
-
-        # luôn nằm trên các object khác
         sub.set_z_index(10)
 
         return sub
 
     def construct(self):
 
-        self.wait(0.5)
-
         # ── PATH ASSETS ──
         base_path = Path("video_project/demo/assets")
         icon_svg = base_path / "icons/user.svg"
         image_png = base_path / "images/key_insight.png"
 
-        # ── BỐ CỤC ──
         Y_ICONS = 3.8
         Y_STATS = 1.4
         Y_IMAGE = -1.4
@@ -47,7 +37,7 @@ class SituationScene(Scene):
         good_color = GREEN
         bad_color = PURE_RED
 
-        # ── ICON NGƯỜI ──
+        # ── ICON ──
         icons = VGroup()
 
         for i in range(10):
@@ -63,7 +53,7 @@ class SituationScene(Scene):
         icons.arrange_in_grid(rows=2, cols=5, buff=0.4)
         icons.move_to(UP * Y_ICONS)
 
-        # ── TEXT PHẦN TRĂM ──
+        # ── TEXT ──
         percent_good = Text(
             "30% good candidate",
             font_size=48,
@@ -91,8 +81,8 @@ class SituationScene(Scene):
         )
 
         subtitle2 = self.create_subtitle(
-            "According to statistics over many years, \n"
-            "only about <span foreground='green'>30%</span> \n"
+            "According to statistics over many years,\n"
+            "only about <span foreground='green'>30%</span>\n"
             "of candidates are truly excellent."
         )
 
@@ -102,44 +92,44 @@ class SituationScene(Scene):
             "are average or weak."
         )
 
-        # ── ANIMATION ──
+        # ── INTRO ANIMATION (~2s) ──
         self.play(
-            FadeIn(icons, lag_ratio=0.06, run_time=1.2),
-            FadeIn(stats_group, run_time=1.0),
-            FadeIn(bottom_image, run_time=1.0),
+            FadeIn(icons, lag_ratio=0.05, run_time=1),
+            FadeIn(stats_group, run_time=0.9),
+            FadeIn(bottom_image, run_time=0.9),
         )
 
-        # subtitle 1
-        self.play(Write(subtitle1), run_time=1.6)
-        self.wait(2)
-        self.play(FadeOut(subtitle1))
+        # ── SUBTITLE 1 (~2s) ──
+        self.play(Write(subtitle1), run_time=1.2)
+        self.wait(0.8)
+        self.play(FadeOut(subtitle1), run_time=0.4)
 
-        # subtitle 2
-        self.play(Write(subtitle2), run_time=1.8)
+        # ── SUBTITLE 2 (~3s) ──
+        self.play(Write(subtitle2), run_time=1.3)
 
         self.play(
             percent_good.animate.scale(1.2),
             icons[:3].animate.scale(1.2),
             rate_func=there_and_back,
-            run_time=1.5
+            run_time=1.2
         )
 
-        self.wait(1.5)
-        self.play(FadeOut(subtitle2))
+        self.wait(0.5)
+        self.play(FadeOut(subtitle2), run_time=0.4)
 
-        # subtitle 3
-        self.play(Write(subtitle3), run_time=1.6)
+        # ── SUBTITLE 3 (~2.5s) ──
+        self.play(Write(subtitle3), run_time=1.2)
 
         self.play(
             percent_bad.animate.scale(1.2),
             icons[3:].animate.scale(1.1),
             rate_func=there_and_back,
-            run_time=1.5
+            run_time=1.1
         )
 
-        self.wait(1)
+        self.wait(0.5)
 
-        # fade out toàn bộ
+        # ── FADE OUT (~0.6s) ──
         self.play(
             FadeOut(
                 Group(
@@ -148,5 +138,6 @@ class SituationScene(Scene):
                     bottom_image,
                     subtitle3
                 )
-            )
+            ),
+            run_time=0.6
         )
