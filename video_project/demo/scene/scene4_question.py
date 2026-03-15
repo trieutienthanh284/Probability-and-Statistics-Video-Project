@@ -126,7 +126,7 @@ class Question(Scene):
 
         # Kích thước công thức lớn (scale_to_fit_width=6)
         formula = ImageMobject(
-            "video_project/demo/assets/images/expectation-formula.png"
+            "video_project/demo/assets/formula/expectation.png"
         ).scale_to_fit_width(6).move_to(UP * 0.7)
         formula.set_color(WHITE)
 
