@@ -11,7 +11,7 @@ class MathAnalystScene(Scene):
     def construct(self):
 
         # vị trí công thức
-        RIGHT_X = 0.
+        RIGHT_X = -1
 
         # icon nhỏ xuống 2 lần
         ICON_SCALE = 0.3
@@ -26,7 +26,7 @@ class MathAnalystScene(Scene):
         ).set_color(GREEN)
 
         p_bad = MathTex(
-            r"P(\text{Avg/Weak}) = 0.7",
+            r"P(\text{Not Good}) = 0.7",
             font_size=42
         ).set_color(RED)
 
@@ -84,17 +84,17 @@ class MathAnalystScene(Scene):
         # ======================
 
         v1_bad = MathTex(
-            r"P(R1 \mid \text{Not\Good})=0.5",
+            r"P(R1 \mid \text{Not Good}) = 0.5",
             font_size=40
         ).set_color(RED)
 
         v2_bad = MathTex(
-            r"P(R2 \mid \text{Not\Good})=0.4",
+            r"P(R2 \mid \text{Not Good}) = 0.4",
             font_size=40
         ).set_color(RED)
 
         v3_bad = MathTex(
-            r"P(R3 \mid \text{Not\Good})=0.3",
+            r"P(R3 \mid \text{Not Good}) = 0.3",
             font_size=40
         ).set_color(RED)
 
