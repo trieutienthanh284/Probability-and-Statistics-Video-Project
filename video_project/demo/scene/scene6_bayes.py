@@ -104,7 +104,7 @@ class ExplanationScene(Scene):
         ).next_to(eq2, DOWN, buff=0.4)
 
         self.play(Write(eq3))
-        self.wait(0.5)
+        self.wait(1)
 
         # =========================
         # BAYES
@@ -117,7 +117,7 @@ class ExplanationScene(Scene):
         ).next_to(eq3, DOWN, buff=0.4)
 
         self.play(Write(eq4))
-        self.wait(0.5)
+        self.wait(1)
 
         # highlight final good candidates
         self.play(
@@ -145,4 +145,4 @@ class ExplanationScene(Scene):
 
         self.play(FadeIn(conclusion))
 
-        self.wait(2)
+        self.wait(3)
