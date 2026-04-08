@@ -10,10 +10,50 @@ config.frame_width = 8.0
 class MathAnalystScene(Scene):
     def construct(self):
 
-        # vị trí công thức
-        RIGHT_X = -1
+        # ======================
+        # LOGO + SUB POSITION
+        # ======================
 
-        # icon nhỏ xuống 2 lần
+        logo_pos = UP * 6
+        sub_pos = DOWN * 3.8
+
+        logo = ImageMobject(
+            "video_project/demo/assets/images/fami.png"
+        ).scale(0.3).move_to(logo_pos)
+
+        self.add(logo)
+
+        def create_dual_sub(en, vi):
+            max_w = config.frame_width - 1.5
+
+            en_text = Paragraph(
+                en,
+                font="Arial",
+                font_size=22,
+                weight=BOLD,
+                alignment="center",
+                width=max_w
+            ).set_color(WHITE)
+
+            vi_text = Paragraph(
+                vi,
+                font="Arial",
+                font_size=18,
+                alignment="center",
+                width=max_w
+            ).set_color(YELLOW)
+
+            return VGroup(en_text, vi_text).arrange(
+                DOWN, buff=0.15
+            ).move_to(sub_pos)
+
+        sub = create_dual_sub(
+            "We compute prior probabilities and conditional probabilities for each interview round.",
+            "Ta xác định xác suất tiên nghiệm và xác suất điều kiện của từng vòng phỏng vấn."
+        )
+
+        # vị trí công thức (đẩy xuống để tránh logo)
+        RIGHT_X = -1
         ICON_SCALE = 0.3
 
         # ======================
@@ -36,7 +76,8 @@ class MathAnalystScene(Scene):
             buff=0.4
         )
 
-        priors.move_to([RIGHT_X, 5.2, 0], aligned_edge=LEFT)
+        # đẩy xuống thấp hơn để không đụng logo
+        priors.move_to([RIGHT_X, 4.2, 0], aligned_edge=LEFT)
 
         main_icon = ImageMobject(
             "video_project/demo/assets/icons/calculating.png"
@@ -117,6 +158,8 @@ class MathAnalystScene(Scene):
         # ======================
         # ANIMATION
         # ======================
+
+        self.play(FadeIn(sub))
 
         self.play(FadeIn(main_icon), run_time=1)
 

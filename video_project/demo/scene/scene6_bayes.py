@@ -8,141 +8,108 @@ config.frame_width = 8.0
 
 class ExplanationScene(Scene):
     def construct(self):
+        # ── SETTINGS ──
+        logo_pos = UP * 6
+        sub_pos = DOWN * 4.2
+        eq_pos = DOWN * 1.5  # Vị trí cố định để hiện các dòng tính toán
 
+        # ── LOGO ──
+        logo = ImageMobject("video_project/demo/assets/images/fami.png").scale(0.3).move_to(logo_pos)
+        self.add(logo)
+
+        # ── HÀM TẠO SUBTITLE ──
+        def create_dual_sub(en, vi):
+            max_w = config.frame_width - 1.5
+            en_text = Paragraph(en, font="Arial", font_size=22, weight=BOLD, alignment="center", width=max_w).set_color(
+                WHITE)
+            vi_text = Paragraph(vi, font="Arial", font_size=18, alignment="center", width=max_w).set_color(YELLOW)
+            return VGroup(en_text, vi_text).arrange(DOWN, buff=0.15).move_to(sub_pos)
+
+        # ── GRID 100 ICONS (Nén lại để tránh đè logo) ──
         icon_path = "video_project/demo/assets/icons/man.png"
-
         people = Group()
-
-        icon_scale = 0.1
-        spacing = 0.6
-
-        # =========================
-        # GRID ICON (ĐẨY LÊN CAO)
-        # =========================
+        icon_scale = 0.08  # Thu nhỏ icon một chút
+        spacing_x = 0.5
+        spacing_y = 0.45
 
         for i in range(100):
-
             p = ImageMobject(icon_path).scale(icon_scale)
-
             row = i // 10
             col = i % 10
-
-            p.move_to(
-                UP * (5.5 - row * spacing) +
-                LEFT * (2.7 - col * spacing)
-            )
-
+            # Tọa độ grid bắt đầu từ UP 4.5
+            p.move_to(UP * (4.5 - row * spacing_y) + LEFT * (2.25 - col * spacing_x))
             people.add(p)
 
         self.play(FadeIn(people), run_time=1.5)
 
         # =========================
-        # PRIOR PROBABILITY
+        # CÁC GIAI ĐOẠN TÍNH TOÁN (Hiện -> Ẩn)
         # =========================
 
-        eq0 = MathTex(
-            r"P(\mathrm{Good}) = 0.3,\quad P(\mathrm{Average}) = 0.7",
-            font_size=26,
-            color=WHITE
-        ).move_to(DOWN * 1.5)
+        # 1. PRIOR (Xác suất ban đầu)
+        sub1 = create_dual_sub("Assume 30% are Good and 70% are Average candidates.",
+                               "Giả sử 30% ứng viên Giỏi và 70% ứng viên Trung bình.")
+        eq1 = VGroup(
+            MathTex(r"P(\text{Good}) = 0.3", font_size=32),
+            MathTex(r"P(\text{Avg}) = 0.7", font_size=32)
+        ).arrange(DOWN).move_to(eq_pos)
 
-        self.play(Write(eq0))
-        self.wait(0.5)
-
+        self.play(FadeIn(sub1), Write(eq1))
         self.play(
             people[:30].animate.set_color(GREEN),
             people[30:].animate.set_color(ORANGE),
-            run_time=1.2
+            run_time=1
         )
+        self.wait(2)
+        self.play(FadeOut(eq1), run_time=0.25)
 
-        # =========================
-        # PROBABILITY PASS 3 ROUNDS
-        # =========================
+        # 2. GOOD PASS (Giỏi vượt qua)
+        sub2 = create_dual_sub("Probability of a Good candidate passing all 3 rounds.",
+                               "Xác suất ứng viên Giỏi vượt qua cả 3 vòng.")
+        eq2 = MathTex(r"P(\text{Pass 3} \mid \text{Good}) = 0.8 \times 0.85 \times 0.9 = 0.612", font_size=32,
+                      color=BLUE).move_to(eq_pos)
 
-        eq1 = MathTex(
-            r"P(\mathrm{Pass\ 3}|Good) = 0.8 \times 0.85 \times 0.9 = 0.612",
-            font_size=26,
-            color=BLUE
-        ).next_to(eq0, DOWN, buff=0.4)
+        self.play(ReplacementTransform(sub1, sub2), Write(eq2))
+        # Highlight 18 người (0.612 * 30)
+        self.play(people[:18].animate.set_color(BLUE), run_time=1)
+        self.wait(2)
+        self.play(FadeOut(eq2), run_time=0.25)
 
-        self.play(Write(eq1))
-        self.wait(0.5)
+        # 3. AVG PASS (Trung bình vượt qua)
+        sub3 = create_dual_sub("Probability of an Average candidate passing 3 rounds.",
+                               "Xác suất ứng viên Trung bình vượt qua 3 vòng.")
+        eq3 = MathTex(r"P(\text{Pass 3} \mid \text{Avg}) = 0.5 \times 0.4 \times 0.3 = 0.06", font_size=32,
+                      color=RED).move_to(eq_pos)
 
-        # good pass 3 rounds = 18
-        self.play(
-            people[:18].animate.set_color(BLUE),
-            run_time=1.3
-        )
+        self.play(ReplacementTransform(sub2, sub3), Write(eq3))
+        # Highlight 4 người (0.06 * 70)
+        self.play(people[30:34].animate.set_color(RED), run_time=1)
+        self.wait(2)
+        self.play(FadeOut(eq3), run_time=0.25)
 
-        # =========================
-        # BAD PASS PROBABILITY
-        # =========================
+        # 4. TOTAL & BAYES (Xác suất toàn phần & Bayes)
+        sub4 = create_dual_sub("Using Bayes' theorem to find actual Good candidates.",
+                               "Dùng Bayes tính xác suất thực sự Giỏi khi đã đỗ.")
+        eq4 = VGroup(
+            MathTex(r"P(\text{Pass 3}) = 0.2256", font_size=32, color=YELLOW),
+            MathTex(r"P(\text{Good} \mid \text{Pass}) = \frac{0.612 \times 0.3}{0.2256} = 0.814", font_size=32,
+                    color=PURPLE)
+        ).arrange(DOWN).move_to(eq_pos)
 
-        eq2 = MathTex(
-            r"P(\mathrm{Pass\ 3}|Average) = 0.5 \times 0.4 \times 0.3 = 0.06",
-            font_size=26,
-            color=RED
-        ).next_to(eq1, DOWN, buff=0.4)
-
-        self.play(Write(eq2))
-        self.wait(0.5)
-
-        # bad pass = 4
-        self.play(
-            people[30:34].animate.set_color(RED),
-            run_time=1.3
-        )
-
-        # =========================
-        # TOTAL PROBABILITY
-        # =========================
-
-        eq3 = MathTex(
-            r"P(\mathrm{Pass\ 3}) = 0.3 \times 0.612 + 0.7 \times 0.06 = 0.2256",
-            font_size=26,
-            color=YELLOW
-        ).next_to(eq2, DOWN, buff=0.4)
-
-        self.play(Write(eq3))
-        self.wait(1)
-
-        # =========================
-        # BAYES
-        # =========================
-
-        eq4 = MathTex(
-            r"P(\mathrm{Good}|Pass) = \frac{0.612\times0.3}{0.2256} = 0.814",
-            font_size=28,
-            color=PURPLE
-        ).next_to(eq3, DOWN, buff=0.4)
-
-        self.play(Write(eq4))
-        self.wait(1)
-
-        # highlight final good candidates
-        self.play(
-            people[:18].animate.set_color(GREEN),
-            run_time=1.2
-        )
-
-        # =========================
-        # EXPECTED VALUE
-        # =========================
-
-        eq5 = MathTex(
-            r"E = 0.814 \times 800 + 0.186 \times (-300) = 595.4 > 0",
-            font_size=28,
-            color=WHITE
-        ).next_to(eq4, DOWN, buff=0.4)
-
-        self.play(Write(eq5))
-
-        conclusion = Text(
-            "HIRE ALL",
-            font_size=36,
-            color=GREEN
-        ).next_to(eq5, DOWN)
-
-        self.play(FadeIn(conclusion))
-
+        self.play(ReplacementTransform(sub3, sub4), Write(eq4))
         self.wait(3)
+        self.play(FadeOut(eq4), run_time=0.25)
+
+        # 5. EXPECTATION (Kỳ vọng)
+        sub5 = create_dual_sub("Expected value E > 0: The decision is to HIRE ALL.",
+                               "Kỳ vọng E > 0: Quyết định là TUYỂN TẤT CẢ.")
+        eq5 = VGroup(
+            MathTex(r"E = 0.814 \times 800 + 0.186 \times (-300) = 595.4", font_size=34),
+            Text("DECISION: HIRE ALL", font_size=36, color=GREEN)
+        ).arrange(DOWN, buff=0.4).move_to(eq_pos)
+
+        self.play(ReplacementTransform(sub4, sub5), Write(eq5))
+        self.wait(4)
+
+        # OUTRO
+        self.play(FadeOut(Group(*[m for m in self.mobjects if m != logo])))
