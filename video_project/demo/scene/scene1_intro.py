@@ -9,7 +9,12 @@ config.frame_width = 8.0
 class IntroScene(Scene):
     def construct(self):
 
-        # PHẦN CHỮ
+        # LOGO TRÊN CÙNG
+        logo = ImageMobject("video_project/demo/assets/images/fami.png")\
+            .scale(0.3)\
+            .move_to(UP * 6)
+
+        # PHẦN CHỮ (đẩy xuống để chừa chỗ logo)
         title = MarkupText(
             f'<span weight="bold">Nắm <span color="{YELLOW}">bí quyết</span>\n'
             f'<span color="{BLUE}">tuyển dụng</span> <span color="{GREEN}">nhân sự</span>\n'
@@ -19,18 +24,19 @@ class IntroScene(Scene):
             font_size=44,
             line_spacing=1.5,
             justify=True
-        ).move_to(UP * 3.8)
+        ).move_to(UP * 2.2)
 
         # NHÂN VẬT
         character = ImageMobject("video_project/demo/assets/images/DoMixi.png")\
-            .scale(1.15)\
-            .move_to(DOWN * 1.5)
+            .scale(1.1)\
+            .move_to(DOWN * 2.5)
 
-        character.shift(DOWN * 1.8)
+        character.shift(DOWN * 1.0)
 
-        # Nhân vật + chữ xuất hiện
+        # Logo + Nhân vật + chữ xuất hiện
         self.play(
-            character.animate.shift(UP * 1.8),
+            FadeIn(logo, shift=DOWN),
+            character.animate.shift(UP * 1.0),
             FadeIn(character, scale=0.9),
             Write(title),
             run_time=2.0,
@@ -49,5 +55,6 @@ class IntroScene(Scene):
         self.play(
             FadeOut(character),
             FadeOut(title),
+            FadeOut(logo),
             run_time=0.8
         )

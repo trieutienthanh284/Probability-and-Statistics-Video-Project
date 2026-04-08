@@ -9,21 +9,47 @@ config.frame_width = 8.0
 
 class SituationScene(Scene):
 
-    def create_subtitle(self, text):
-        sub = MarkupText(
-            text,
-            font_size=26,
+    # REALTIME SUBTITLE
+    def create_realtime_sub(self, en, vi):
+        # Xác định chiều rộng tối đa cho phép (trừ đi lề hai bên)
+        max_w = config.frame_width - 1.5
+
+        en_text = Paragraph(
+            en,
+            font="Arial",
+            font_size=18,
             weight=BOLD,
-            justify=True
+            alignment="center",
+            width=max_w  # Ép Paragraph tự ngắt dòng theo chiều rộng này
+        ).set_color(WHITE)
+
+        vi_text = Paragraph(
+            vi,
+            font="Arial",
+            font_size=18,
+            alignment="center",
+            width=max_w  # Ép Paragraph tự ngắt dòng theo chiều rộng này
+        ).set_color(YELLOW)
+
+        group = VGroup(en_text, vi_text).arrange(
+            DOWN,
+            buff=0.2  # Tăng nhẹ khoảng cách để dễ đọc khi có nhiều dòng
         )
 
-        sub.set_max_width(config.frame_width - 1)
-        sub.to_edge(DOWN, buff=2.2)
-        sub.set_z_index(10)
+        # Căn giữa group và đưa xuống dưới cùng
+        group.move_to(DOWN * 3.6)
+        group.set_z_index(100)
 
-        return sub
+        return group
 
     def construct(self):
+
+        # ── LOGO ──
+        logo = ImageMobject(
+            "video_project/demo/assets/images/fami.png"
+        ).scale(0.3).move_to(UP * 6)
+
+        self.add(logo)
 
         # ── PATH ASSETS ──
         base_path = Path("video_project/demo/assets")
@@ -41,7 +67,7 @@ class SituationScene(Scene):
         icons = VGroup()
 
         for i in range(10):
-            icon = SVGMobject(str(icon_svg)).scale(0.65)
+            icon = SVGMobject(str(icon_svg)).scale(0.35)
 
             if i < 3:
                 icon.set_color(good_color)
@@ -74,38 +100,36 @@ class SituationScene(Scene):
         bottom_image.scale_to_fit_width(7.5)
         bottom_image.move_to(UP * Y_IMAGE)
 
-        # ── SUBTITLE ──
-        subtitle1 = self.create_subtitle(
-            "A technology company is recruiting\n"
-            "for the Software Engineer position."
+        # ── REALTIME SUBTITLE ──
+        sub1 = self.create_realtime_sub(
+            "A technology company is recruiting for the Software Engineer position.",
+            "Một công ty công nghệ (IT) đang tuyển dụng vị trí Kỹ sư phần mềm."
         )
 
-        subtitle2 = self.create_subtitle(
-            "According to statistics over many years,\n"
-            "only about <span foreground='green'>30%</span>\n"
-            "of candidates are truly excellent."
+        sub2 = self.create_realtime_sub(
+            "Based on many years of statistics, only about 30% are truly strong candidates.",
+            "Theo thống kê nhiều năm, chỉ khoảng 30% ứng viên thực sự là ứng viên giỏi."
         )
 
-        subtitle3 = self.create_subtitle(
-            "while the remaining "
-            "<span foreground='red'>70%</span>\n"
-            "are average or weak."
+        sub3 = self.create_realtime_sub(
+            "The remaining 70% are average or weak candidates.",
+            "Còn lại 70% là ứng viên trung bình hoặc yếu."
         )
 
-        # ── INTRO ANIMATION (~2s) ──
+        # ── INTRO ANIMATION ──
         self.play(
             FadeIn(icons, lag_ratio=0.05, run_time=1),
             FadeIn(stats_group, run_time=0.9),
             FadeIn(bottom_image, run_time=0.9),
         )
 
-        # ── SUBTITLE 1 (~2s) ──
-        self.play(Write(subtitle1), run_time=1.2)
-        self.wait(0.8)
-        self.play(FadeOut(subtitle1), run_time=0.4)
+        # SUB 1
+        self.play(FadeIn(sub1), run_time=0.3)
+        self.wait(1.7)
+        self.play(FadeOut(sub1), run_time=0.2)
 
-        # ── SUBTITLE 2 (~3s) ──
-        self.play(Write(subtitle2), run_time=1.3)
+        # SUB 2
+        self.play(FadeIn(sub2), run_time=0.3)
 
         self.play(
             percent_good.animate.scale(1.2),
@@ -115,10 +139,10 @@ class SituationScene(Scene):
         )
 
         self.wait(0.5)
-        self.play(FadeOut(subtitle2), run_time=0.4)
+        self.play(FadeOut(sub2), run_time=0.2)
 
-        # ── SUBTITLE 3 (~2.5s) ──
-        self.play(Write(subtitle3), run_time=1.2)
+        # SUB 3
+        self.play(FadeIn(sub3), run_time=0.3)
 
         self.play(
             percent_bad.animate.scale(1.2),
@@ -129,14 +153,14 @@ class SituationScene(Scene):
 
         self.wait(0.5)
 
-        # ── FADE OUT (~0.6s) ──
+        # FADE OUT
         self.play(
             FadeOut(
                 Group(
                     icons,
                     stats_group,
                     bottom_image,
-                    subtitle3
+                    sub3
                 )
             ),
             run_time=0.6
