@@ -14,7 +14,7 @@ class IntroScene(Scene):
             .scale(0.3)\
             .move_to(UP * 6)
 
-        # PHẦN CHỮ (đẩy xuống để chừa chỗ logo)
+        # PHẦN CHỮ
         title = MarkupText(
             f'<span weight="bold">Nắm <span color="{YELLOW}">bí quyết</span>\n'
             f'<span color="{BLUE}">tuyển dụng</span> <span color="{GREEN}">nhân sự</span>\n'
@@ -26,35 +26,48 @@ class IntroScene(Scene):
             justify=True
         ).move_to(UP * 2.2)
 
-        # NHÂN VẬT
-        character = ImageMobject("video_project/demo/assets/images/DoMixi.png")\
-            .scale(1.1)\
-            .move_to(DOWN * 2.5)
+        # ===== 2 HÌNH THAY CHO NHÂN VẬT =====
+        bayes_img = ImageMobject("video_project/demo/assets/images/bayes-theorem.png")\
+            .scale(0.45)\
+            .move_to(DOWN * 2.5 + LEFT * 1.5)
 
-        character.shift(DOWN * 1.0)
+        prob_img = ImageMobject("video_project/demo/assets/images/probability.png")\
+            .scale(0.45)\
+            .move_to(DOWN * 2.5 + RIGHT * 1.5)
 
-        # Logo + Nhân vật + chữ xuất hiện
+        # Animation intro
         self.play(
             FadeIn(logo, shift=DOWN),
-            character.animate.shift(UP * 1.0),
-            FadeIn(character, scale=0.9),
             Write(title),
-            run_time=2.0,
-            lag_ratio=0.05
+            run_time=1.5
         )
 
-        # Pulse nhẹ
+        # Ảnh 1 xuất hiện
         self.play(
-            character.animate.scale(1.05),
+            FadeIn(bayes_img, shift=UP, scale=0.4),
+            run_time=0.5
+        )
+
+        # Ảnh 2 xuất hiện sau (lần lượt)
+        self.play(
+            FadeIn(prob_img, shift=UP, scale=0.4),
+            run_time=0.5
+        )
+
+        # Pulse nhẹ cho cả cụm
+        self.play(
+            bayes_img.animate.scale(1.05),
+            prob_img.animate.scale(1.05),
             title.animate.scale(1.03),
             rate_func=there_and_back,
-            run_time=0.7
+            run_time=0.5
         )
 
         # Thoát cảnh
         self.play(
-            FadeOut(character),
+            FadeOut(bayes_img),
+            FadeOut(prob_img),
             FadeOut(title),
             FadeOut(logo),
-            run_time=0.8
+            run_time=0.4
         )
