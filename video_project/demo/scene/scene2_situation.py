@@ -9,7 +9,7 @@ config.frame_width = 8.0
 
 class SituationScene(Scene):
 
-    # REALTIME SUBTITLE
+    # REALTIME SUBTITLE - ĐÃ CHỈNH SỬA ĐỂ THÊM KHUNG VIỀN
     def create_realtime_sub(self, en, vi):
         # Xác định chiều rộng tối đa cho phép (trừ đi lề hai bên)
         max_w = config.frame_width - 1.5
@@ -20,7 +20,7 @@ class SituationScene(Scene):
             font_size=18,
             weight=BOLD,
             alignment="center",
-            width=max_w  # Ép Paragraph tự ngắt dòng theo chiều rộng này
+            width=max_w
         ).set_color(WHITE)
 
         vi_text = Paragraph(
@@ -28,13 +28,30 @@ class SituationScene(Scene):
             font="Arial",
             font_size=18,
             alignment="center",
-            width=max_w  # Ép Paragraph tự ngắt dòng theo chiều rộng này
+            width=max_w
         ).set_color(YELLOW)
 
-        group = VGroup(en_text, vi_text).arrange(
+        text_group = VGroup(en_text, vi_text).arrange(
             DOWN,
-            buff=0.2  # Tăng nhẹ khoảng cách để dễ đọc khi có nhiều dòng
+            buff=0.2
         )
+
+        # Tạo khung viền bao quanh text_group
+        # buff: khoảng cách giữa chữ và viền
+        # corner_radius: độ bo góc của khung
+        frame = SurroundingRectangle(
+            text_group,
+            color=WHITE,
+            buff=0.3,
+            stroke_width=2,
+            corner_radius=0.1
+        )
+
+        # Thêm một lớp nền mờ phía sau khung (tùy chọn, giúp dễ đọc hơn)
+        background = BackgroundRectangle(frame, color=BLACK, fill_opacity=0.5, buff=0)
+
+        # Gộp tất cả vào một group
+        group = VGroup(background, frame, text_group)
 
         # Căn giữa group và đưa xuống dưới cùng
         group.move_to(DOWN * 3.6)

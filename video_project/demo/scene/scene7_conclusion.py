@@ -5,6 +5,7 @@ config.pixel_width = 1080
 config.frame_height = 14.22
 config.frame_width = 8.0
 
+
 class ConclusionScene(Scene):
     def construct(self):
         # ── SETTINGS ──
@@ -15,12 +16,45 @@ class ConclusionScene(Scene):
         logo = ImageMobject("video_project/demo/assets/images/fami.png").scale(0.3).move_to(logo_pos)
         self.add(logo)
 
-        # ── HÀM TẠO SUBTITLE ANH-VIỆT ──
+        # ── HÀM TẠO SUBTITLE ANH-VIỆT CÓ KHUNG VIỀN (ĐÃ CẬP NHẬT) ──
         def create_dual_sub(en, vi):
             max_w = config.frame_width - 1.2
-            en_text = Paragraph(en, font="Arial", font_size=20, weight=BOLD, alignment="center", width=max_w).set_color(WHITE)
-            vi_text = Paragraph(vi, font="Arial", font_size=18, alignment="center", width=max_w).set_color(YELLOW)
-            return VGroup(en_text, vi_text).arrange(DOWN, buff=0.15).move_to(sub_pos)
+
+            en_text = Paragraph(
+                en, font="Arial", font_size=20, weight=BOLD,
+                alignment="center", width=max_w
+            ).set_color(WHITE)
+
+            vi_text = Paragraph(
+                vi, font="Arial", font_size=18,
+                alignment="center", width=max_w
+            ).set_color(YELLOW)
+
+            # Gom nhóm chữ để tính toán kích thước khung
+            text_group = VGroup(en_text, vi_text).arrange(DOWN, buff=0.15)
+
+            # Tạo khung viền tự động co giãn theo text_group
+            frame = SurroundingRectangle(
+                text_group,
+                color=WHITE,
+                buff=0.3,
+                stroke_width=2,
+                corner_radius=0.1
+            )
+
+            # Tạo nền đen mờ phía sau
+            background = BackgroundRectangle(
+                frame,
+                color=BLACK,
+                fill_opacity=0.5,
+                buff=0
+            )
+
+            # Gộp tất cả thành một khối duy nhất
+            full_sub = VGroup(background, frame, text_group).move_to(sub_pos)
+            full_sub.set_z_index(100)
+
+            return full_sub
 
         # ===================== PART 1: FORMULA SUMMARY =====================
 
@@ -49,6 +83,8 @@ class ConclusionScene(Scene):
         self.play(FadeIn(summary1), FadeIn(sub1))
         self.play(LaggedStart(*[Write(f) for f in formulas_top], lag_ratio=0.3))
         self.play(Create(arrow))
+
+        # Sử dụng ReplacementTransform để khung viền tự co giãn mượt mà khi đổi sub
         self.play(ReplacementTransform(sub1, sub1b), LaggedStart(*[Write(f) for f in formulas_bottom], lag_ratio=0.3))
         self.wait(2)
         self.play(FadeOut(Group(summary1, formula_block, sub1b)))
@@ -92,7 +128,8 @@ class ConclusionScene(Scene):
         )
 
         final_icon = ImageMobject("video_project/demo/assets/icons/question-mark.png").scale(0.6).move_to(UP * 1.5)
-        question = Text("Is the actual productivity\nreally what we expected?", font_size=36, color=YELLOW, line_spacing=1.2).next_to(final_icon, DOWN, buff=0.8)
+        question = Text("Is the actual productivity\nreally what we expected?", font_size=36, color=YELLOW,
+                        line_spacing=1.2).next_to(final_icon, DOWN, buff=0.8)
 
         self.play(FadeIn(final_icon, scale=1.2), FadeIn(sub3))
         self.play(Write(question))

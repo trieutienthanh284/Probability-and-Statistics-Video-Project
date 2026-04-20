@@ -16,7 +16,7 @@ class Question(Scene):
         logo = ImageMobject("video_project/demo/assets/images/fami.png").scale(0.3).move_to(logo_pos)
         self.add(logo)
 
-        # ── HÀM SUBTITLE ──
+        # ── HÀM SUBTITLE CÓ KHUNG VIỀN (ĐÃ CẬP NHẬT) ──
         def create_dual_sub(en, vi):
             max_w = config.frame_width - 1.5
 
@@ -30,8 +30,31 @@ class Question(Scene):
                 alignment="center", width=max_w
             ).set_color(YELLOW)
 
-            group = VGroup(en_text, vi_text).arrange(DOWN, buff=0.15).move_to(sub_pos)
-            return group
+            # Gom nhóm chữ trước để tính kích thước khung
+            text_group = VGroup(en_text, vi_text).arrange(DOWN, buff=0.15)
+
+            # Tạo khung viền tự động co giãn theo text_group
+            frame = SurroundingRectangle(
+                text_group,
+                color=WHITE,
+                buff=0.3,
+                stroke_width=2,
+                corner_radius=0.1
+            )
+
+            # Tạo nền đen mờ phía sau
+            background = BackgroundRectangle(
+                frame,
+                color=BLACK,
+                fill_opacity=0.5,
+                buff=0
+            )
+
+            # Gộp tất cả và đặt vào vị trí yêu cầu
+            full_sub = VGroup(background, frame, text_group).move_to(sub_pos)
+            full_sub.set_z_index(100)
+
+            return full_sub
 
         # ==============================
         # SCENE 1
@@ -143,4 +166,4 @@ class Question(Scene):
 
         self.play(FadeIn(surprise_icon, shift=UP * 0.3))
 
-        self.wait(4)
+        self.wait(3)

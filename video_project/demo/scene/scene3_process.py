@@ -19,9 +19,10 @@ class ProcessScene(Scene):
         logo = ImageMobject("video_project/demo/assets/images/fami.png").scale(0.3).move_to(UP * 6)
         self.add(logo)
 
-        # ── HÀM TẠO SUBTITLE 2 NGÔN NGỮ ──
+        # ── HÀM TẠO SUBTITLE CÓ KHUNG VIỀN (ĐÃ CẬP NHẬT) ──
         def create_dual_sub(en, vi):
             max_w = config.frame_width - 1.5
+
             en_text = Paragraph(
                 en, font="Arial", font_size=22, weight=BOLD,
                 alignment="center", width=max_w
@@ -32,12 +33,36 @@ class ProcessScene(Scene):
                 alignment="center", width=max_w
             ).set_color(YELLOW)
 
-            group = VGroup(en_text, vi_text).arrange(DOWN, buff=0.2)
-            group.move_to(DOWN * 3.8)  # Tọa độ theo yêu cầu
-            group.set_z_index(100)
-            return group
+            # Gộp text trước để tính toán kích thước khung
+            text_group = VGroup(en_text, vi_text).arrange(DOWN, buff=0.2)
+
+            # Tạo khung viền bao quanh chữ
+            # buff=0.3 tạo khoảng cách giữa chữ và viền
+            frame = SurroundingRectangle(
+                text_group,
+                color=WHITE,
+                buff=0.3,
+                stroke_width=2,
+                corner_radius=0.1
+            )
+
+            # Tạo nền đen mờ phía sau để dễ đọc
+            background = BackgroundRectangle(
+                frame,
+                color=BLACK,
+                fill_opacity=0.5,
+                buff=0
+            )
+
+            # Gộp tất cả thành một nhóm duy nhất
+            full_sub = VGroup(background, frame, text_group)
+            full_sub.move_to(DOWN * 3.8)
+            full_sub.set_z_index(100)
+
+            return full_sub
 
         # ── ICONS ──
+        # Lưu ý: Đảm bảo đường dẫn file svg/png của bạn là chính xác
         group_people = SVGMobject(
             "video_project/demo/assets/icons/crowd-of-users.svg"
         ).scale_to_fit_width(icon_scale).move_to(UP * 4.2 + RIGHT * pipeline_x)
@@ -62,7 +87,7 @@ class ProcessScene(Scene):
         arrow2 = Arrow(cv_icon.get_bottom(), interview_icon.get_top(), **arrow_style)
         arrow3 = Arrow(interview_icon.get_bottom(), coding_icon.get_top(), **arrow_style)
 
-        # ── NOTES (Chỉ số % bên cạnh icon) ──
+        # ── NOTES ──
         def create_note(mobject, good_val, bad_val):
             return MarkupText(
                 f"<span foreground='{good_color}'>Pro: {good_val}%</span>\n"
@@ -103,7 +128,7 @@ class ProcessScene(Scene):
         self.play(cv_icon.animate.scale(1.1), rate_func=there_and_back)
         self.wait(4)
 
-        # Round 2
+        # Round 2 (Sử dụng ReplacementTransform để chuyển đổi mượt cả khung và chữ)
         self.play(FadeIn(interview_icon), GrowArrow(arrow2), Write(note_interview), ReplacementTransform(sub1, sub2))
         self.play(interview_icon.animate.scale(1.1), rate_func=there_and_back)
         self.wait(4)

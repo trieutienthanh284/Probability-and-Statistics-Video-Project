@@ -9,7 +9,6 @@ config.frame_width = 8.0
 
 class MathAnalystScene(Scene):
     def construct(self):
-
         # ======================
         # LOGO + SUB POSITION
         # ======================
@@ -23,6 +22,7 @@ class MathAnalystScene(Scene):
 
         self.add(logo)
 
+        # ── HÀM SUBTITLE CÓ KHUNG VIỀN (ĐÃ CẬP NHẬT) ──
         def create_dual_sub(en, vi):
             max_w = config.frame_width - 1.5
 
@@ -43,9 +43,33 @@ class MathAnalystScene(Scene):
                 width=max_w
             ).set_color(YELLOW)
 
-            return VGroup(en_text, vi_text).arrange(
+            # Gom nhóm chữ để tính toán kích thước
+            text_group = VGroup(en_text, vi_text).arrange(
                 DOWN, buff=0.15
-            ).move_to(sub_pos)
+            )
+
+            # Tạo khung viền tự động co giãn
+            frame = SurroundingRectangle(
+                text_group,
+                color=WHITE,
+                buff=0.3,
+                stroke_width=2,
+                corner_radius=0.1
+            )
+
+            # Tạo nền mờ phía sau
+            background = BackgroundRectangle(
+                frame,
+                color=BLACK,
+                fill_opacity=0.5,
+                buff=0
+            )
+
+            # Gộp tất cả và đặt vào vị trí yêu cầu
+            full_sub = VGroup(background, frame, text_group).move_to(sub_pos)
+            full_sub.set_z_index(100)
+
+            return full_sub
 
         sub = create_dual_sub(
             "We compute prior probabilities and conditional probabilities for each interview round.",
