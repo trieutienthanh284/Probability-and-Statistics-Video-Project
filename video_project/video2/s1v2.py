@@ -1,133 +1,127 @@
 from manim import *
 
-# Cấu hình màn hình dọc 9:16
-config.pixel_height = 1920
+# Cấu hình video dọc 9x16
 config.pixel_width = 1080
-config.frame_height = 16
-config.frame_width = 9
+config.pixel_height = 1920
+config.frame_width = 9.0
+config.frame_height = 16.0
+config.frame_rate = 60
 
 
-class QueueSimulation(Scene):
-    def construct(self):
-        # 1. Chèn Logo Fami
+class PSG_Pressing_Intro(Scene):
+    def setup(self):
+        # 1. Thiết lập nền đen
+        self.camera.background_color = BLACK
+
+        # 2. Thiết lập Logo Fami (Sát mép trên)
+        logo_path = "video_project/demo/assets/images/fami_hust.png"
         try:
-            logo = ImageMobject("video_project/demo/assets/images/fami.png")
-            logo.width = 1.5
-            logo.to_edge(UP, buff=0.4)
+            # Chỉ nạp ảnh trong suốt, không dùng hàm đóng khung vuông nữa.
+            # (Bạn hãy tạo viền trắng ôm sát logo ngay từ file ảnh gốc nhé)
+            fami_logo = ImageMobject(logo_path).scale_to_fit_width(1.2)
+            fami_logo.to_edge(UP, buff=0.2)
+            self.add(fami_logo)
         except:
-            logo = Text("LOGO", color=GREY).to_edge(UP, buff=0.4)
-        self.add(logo)
+            pass
 
-        # 2. Hàm tạo Subtitle (Font Arial, Size 19, Tọa độ -3.8)
-        def create_bilingual_sub(vn_text, en_text):
-            en = Text(en_text, font="Arial", font_size=19, color=WHITE)
-            vn = Text(vn_text, font="Arial", font_size=19, color=YELLOW)
-            sub_group = VGroup(en, vn).arrange(DOWN, buff=0.15)
-            background_rect = SurroundingRectangle(
-                sub_group, color=WHITE, fill_color=BLACK, fill_opacity=0.8, buff=0.3
-            )
-            return VGroup(background_rect, sub_group).move_to(DOWN * 3.8)
+        # 3. Dòng chữ chủ đề Video (Tọa độ UP * 5.8) - Đã in hoa toàn bộ
+        topic_title = Text(
+            "KIỂM ĐỊNH GIẢ THUYẾT\nCHIẾN THUẬT PRESSING",
+            font="Arial",
+            font_size=28,
+            color=TEAL,
+            weight=BOLD
+        ).move_to(UP * 5.8)
+        self.add(topic_title)
 
-        # 3. Quầy thanh toán (Nâng lên UP * 4.5)
-        counter_1 = Rectangle(height=0.8, width=2.2, color=BLUE, fill_opacity=0.8).shift(UP * 4.5)
-        label_1 = Text("Quầy 1", font="Arial", font_size=22).next_to(counter_1, UP, buff=0.2)
+    def create_boxed_subtitle(self, eng_text, vie_text):
+        """Hàm tạo phụ đề chuẩn có viền (Theo chuẩn DOWN * 4.5)"""
+        eng_sub = Text(eng_text, font="Arial", font_size=22, color=WHITE)
+        vie_sub = Text(vie_text, font="Arial", font_size=18, color=YELLOW)
 
-        # 4. Khởi tạo khách hàng (Kích thước lớn 1.01)
-        def create_customer(img_path):
-            try:
-                customer = ImageMobject(img_path)
-                customer.height = 1.01
-                return customer
-            except:
-                return Dot(radius=0.3, color=RED)
+        sub_group = VGroup(eng_sub, vie_sub).arrange(DOWN, buff=0.15)
 
-        path_angry = "video_project/video2/assets2/angry.png"
-        path_happy = "video_project/video2/assets2/satisfied.png"
-
-        queue_left = Group(*[create_customer(path_angry) for _ in range(4)])
-        queue_right = Group(*[create_customer(path_angry) for _ in range(4)])
-
-        # THAY ĐỔI CHÍNH Ở ĐÂY:
-        # buff=0.65: Thu hẹp khoảng cách dọc giữa các icon
-        # buff=0.3 trong next_to: Kéo hàng người sát lên Quầy 1 hơn
-        queue_left.arrange(DOWN, buff=0.65).next_to(counter_1, DOWN, buff=0.3).shift(LEFT * 1.3)
-        queue_right.arrange(DOWN, buff=0.65).next_to(counter_1, DOWN, buff=0.3).shift(RIGHT * 1.3)
-
-        full_queue = Group(queue_left, queue_right)
-
-        # --- TIẾN TRÌNH VIDEO ---
-        self.play(FadeIn(logo))
-
-        # Cảnh 1: Chật kín người
-        sub1 = create_bilingual_sub(
-            "Hôm nay bạn đi siêu thị, quầy thanh toán chật kín người.",
-            "Today you go to supermarket, the checkout is crowded."
-        )
-        self.play(Create(counter_1), Write(label_1))
-        self.play(FadeIn(full_queue, lag_ratio=0.1, shift=UP * 0.2), FadeIn(sub1))
-        self.wait(2)
-        self.play(FadeOut(sub1))
-
-        # Cảnh 2: Mở thêm quầy
-        counter_2 = counter_1.copy().scale(0.8).shift(LEFT * 2.8 + DOWN * 0.8)
-        label_2 = Text("Quầy 2", font="Arial", font_size=20).next_to(counter_2, UP)
-        counter_3 = counter_1.copy().scale(0.8).shift(RIGHT * 2.8 + DOWN * 0.8)
-        label_3 = Text("Quầy 3", font="Arial", font_size=20).next_to(counter_3, UP)
-
-        sub2 = create_bilingual_sub(
-            "Nhưng bỗng nhiên, thêm 2 quầy nữa mở ra...",
-            "But suddenly, two more counters opened..."
+        sub_box = SurroundingRectangle(
+            sub_group,
+            color=GRAY_A,
+            buff=0.3,
+            stroke_width=2,
+            corner_radius=0.1
         )
 
-        happy_anims = []
-        new_happy_people = Group()
+        full_sub = VGroup(sub_box, sub_group).move_to(DOWN * 4.5)
+        return full_sub
 
-        for person in [*queue_left, *queue_right]:
-            happy_p = create_customer(path_happy)
-            happy_p.move_to(person.get_center())
-            new_happy_people.add(happy_p)
-            happy_anims.append(FadeTransform(person, happy_p))
+    def construct(self):
+        # --- ĐƯỜNG DẪN ASSETS ---
+        ICON_QUESTION_PATH = "video_project/video2/assets2/problem.png"
+        PRESSING_IMAGE_PATH = "video_project/video2/assets2/pressing.jpg"
+        PSG_LOGO_PATH = "video_project/video2/assets2/psg.png"
 
+        # ==========================================
+        # PHẦN 1: INTRO (2s)
+        # ==========================================
+        # Đẩy cụm Text và Icon lên cao (UP * 3.2) để tránh đè vào phụ đề
+        question_text = Text("What is\npressing?", font="Arial", font_size=50, weight=BOLD).move_to(UP * 3.2)
+        icon_q = ImageMobject(ICON_QUESTION_PATH).scale(0.6).next_to(question_text, DOWN, buff=0.5)
+
+        sub1 = self.create_boxed_subtitle("What is pressing tactic?", "Chiến thuật pressing là gì?")
+
+        self.play(Write(question_text), run_time=0.8)
+
+        # Đã đổi hiệu ứng Icon thành FadeIn từ từ, đồng bộ thời gian với Subtitle
         self.play(
-            FadeIn(sub2),
-            ReplacementTransform(counter_1.copy(), counter_2),
-            ReplacementTransform(counter_1.copy(), counter_3),
-            Write(label_2), Write(label_3),
-            *happy_anims,
-            run_time=1.5
+            FadeIn(icon_q, run_time=1.2),
+            FadeIn(sub1, run_time=1.2)
         )
         self.wait(1)
+        self.play(FadeOut(question_text), FadeOut(icon_q), FadeOut(sub1))
 
-        # Cảnh 3: Tan biến
-        sub3 = create_bilingual_sub(
-            "Ngày mai, cùng giờ đó, lại chẳng có ai chờ.",
-            "Tomorrow, at the same time, no one is waiting."
+        # ==========================================
+        # PHẦN 2: ĐỊNH NGHĨA PRESSING (8s)
+        # ==========================================
+        pressing_img = ImageMobject(PRESSING_IMAGE_PATH).scale_to_fit_width(7).move_to(UP * 0.5)
+
+        sub2_1 = self.create_boxed_subtitle("Proactive defensive strategy", "Chiến thuật phòng ngự chủ động")
+        sub2_2 = self.create_boxed_subtitle("Pressuring to regain possession", "Áp sát nhanh để giành bóng")
+
+        self.play(FadeIn(pressing_img), FadeIn(sub2_1))
+        self.wait(3.5)
+
+        self.play(ReplacementTransform(sub2_1, sub2_2))
+        self.wait(3.5)
+
+        self.play(FadeOut(pressing_img), FadeOut(sub2_2))
+
+        # ==========================================
+        # PHẦN 3: PSG & KIỂM ĐỊNH GIẢ THUYẾT (18s)
+        # ==========================================
+        # Giảm thêm 15% kích thước theo yêu cầu (0.86 * 0.85 = 0.73)
+        psg_logo = ImageMobject(PSG_LOGO_PATH).scale(0.73).move_to(ORIGIN)
+
+        sub3_1 = self.create_boxed_subtitle("Popular modern tactical weapon", "Vũ khí chiến thuật phổ biến")
+        sub3_2 = self.create_boxed_subtitle("Is PSG's pressing effective?", "Pressing của PSG có hiệu quả?")
+        sub3_3 = self.create_boxed_subtitle("Analyzing via hypothesis testing", "Phân tích bằng kiểm định giả thuyết")
+
+        # Hiệu ứng hiện ra từ từ, mượt mà thay vì nảy
+        self.play(
+            FadeIn(psg_logo, run_time=1.5),
+            FadeIn(sub3_1)
         )
-        self.play(FadeOut(sub2), FadeIn(sub3))
+        self.wait(3.5)
 
-        move_anims = []
-        for i, p in enumerate(new_happy_people):
-            if i % 3 == 0:
-                target = counter_1.get_center()
-            elif i % 3 == 1:
-                target = counter_2.get_center()
-            else:
-                target = counter_3.get_center()
+        self.play(ReplacementTransform(sub3_1, sub3_2))
+        self.wait(4.5)
 
-            move_anims.append(Succession(
-                p.animate.move_to(target).scale(0.3),
-                FadeOut(p)
-            ))
-
-        self.play(AnimationGroup(*move_anims, lag_ratio=0.1), run_time=2.5)
-        self.play(FadeOut(sub3))
-
-        # Cảnh 4: Kết luận
-        sub4 = create_bilingual_sub(
-            "Điều gì đứng sau sự biến động này?",
-            "What stands behind this fluctuation?"
+        # Hiệu ứng nổi bật lên rồi thu nhỏ vào (sử dụng there_and_back)
+        self.play(
+            psg_logo.animate(rate_func=rate_functions.there_and_back).scale(1.3),
+            ReplacementTransform(sub3_2, sub3_3),
+            run_time=1.5
         )
-        self.play(FadeIn(sub4))
-        self.wait(3)
 
+        flash = Flash(psg_logo, color=YELLOW, line_length=0.4, num_lines=12, flash_radius=1.8)
+        self.play(flash)
+        self.wait(5.5)
 
+        self.play(*(map(FadeOut, self.mobjects)))
